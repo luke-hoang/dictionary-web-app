@@ -1,4 +1,25 @@
-search('keyboard');
+
+const searchForm = document.getElementById('search');
+
+searchForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const inputError = document.getElementById('input-error');
+  if (inputError !== null) {
+    inputError.remove();
+  }
+
+  document.querySelector('main').innerHTML = '';
+  
+  const searchText = document.getElementById('search-text');
+  if (searchText.value.length > 0) {
+    search(searchText.value);
+  } else {
+    const message = renderInputError();
+    searchForm.appendChild(message);
+  }
+});
+
 
 async function search(word) {
   const endpoint = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
@@ -11,12 +32,20 @@ async function search(word) {
     });
   } else {
     const error = await response.json();
-    renderError(error);
+    renderSearchError(error);
   }
 }
 
 
-function renderError(error) {
+function renderInputError() {
+  const paragraph = document.createElement('p');
+  paragraph.setAttribute('id', 'input-error');
+  paragraph.textContent = 'Whoops, can\'t be empty...';
+  return paragraph;
+}
+
+
+function renderSearchError(error) {
   const content = document.createElement('article');
   
   const heading = document.createElement('h2');
@@ -27,7 +56,8 @@ function renderError(error) {
   paragraph.textContent = `${error.message} ${error.resolution}`;
   content.appendChild(paragraph);
 
-  document.body.appendChild(content);
+  const main = document.querySelector('main');
+  main.appendChild(content);
 }
 
 
@@ -48,7 +78,8 @@ function renderResult(result) {
   const source = renderUrls(result.sourceUrls);
   content.appendChild(source);
 
-  document.body.appendChild(content);
+  const main = document.querySelector('main');
+  main.appendChild(content);
 }
 
 
@@ -156,5 +187,3 @@ function renderUrls(urls) {
 
   return content;
 }
-
-
