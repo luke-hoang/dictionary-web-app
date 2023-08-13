@@ -1,21 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" theme="light">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
   <link rel="stylesheet" href="./style.css">
+  <script src="./functions.js" defer></script>
   <script src="./main.js" defer></script>
   <title>Frontend Mentor | Dictionary web app</title>
 </head>
+
 <body>
-  <header>
-    <form id="search">
-      <input type="text" id="search-text" placeholder="Search for any word...">
-      <input type="image" id="submit" src="./images/icon-search.svg">
+  <div id="wrapper">
+    <header>
+      <img src="./assets/images/logo.svg" alt="logo" id="logo">
+      <select id="font-menu">
+        <option value="sans-serif">Sans Serif</option>
+        <option value="Serif">Serif</option>
+        <option value="Mono">Mono</option>
+      </select>
+      <div id="vertical-bar"></div>
+      <label for="dark-theme" id="theme-switch">
+        <input type="checkbox" id="dark-theme">
+        <span id="slider"></span>
+      </label>
+      <img src="./assets/images/icon-moon.svg" alt="">
+    </header>
+
+    <form id="search-form">
+      <input type="text" id="search-input" maxlength="50" placeholder="Search for any word...">
+      <input type="image" id="search-icon" src="./assets/images/icon-search.svg">
     </form>
-  </header>
-  <main>
-  </main>
+    
+    <main></main>
+  </div>
 </body>
+
 </html>
