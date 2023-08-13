@@ -1,4 +1,202 @@
-article {
-  border: 1px solid black;
-  margin-bottom: 20px;
+/********** color themes **********/
+
+:root[theme="light"] {
+  --switch-bg: #757575;
+  --search-form-bg: #F4F4F4;
+}
+
+:root[theme="dark"] {
+  --switch-bg: #A445ED;
+  --search-form-bg: #1F1F1F;
+}
+
+
+/********** layout **********/
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+#wrapper {
+  max-width: 740px;
+  padding: 1.5rem;
+  margin: 0 auto;
+}
+
+
+header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+
+/********** headings **********/
+
+h1 {
+  font-size: 4rem;
+  line-height: 4.8rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  line-height: 1.8rem;;
+
+}
+
+h3 {
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+}
+
+
+/********** header **********/
+
+#logo {
+  margin-right: auto;
+}
+
+#font-menu {
+  border: none;
+  text-align: right;
+}
+
+#vertical-bar {
+  height: 24px;
+  border-left: 1px solid;
+  position: relative;
+}
+
+
+/********** theme toggle **********/
+
+#dark-theme {
+  display: none;
+}
+
+#theme-switch {
+  display: inline-block;
+  cursor: pointer;
+  width: 40px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: var(--switch-bg);
+  position: relative;
+}
+
+#slider {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 500ms;
+}
+
+#dark-theme:checked ~ #slider {
+  transform: translateX(20px);
+}
+
+
+/********** search form **********/
+
+#search-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem;
+  border: none;
+  border-radius: 1rem;
+  height: 3rem;
+  background-color: var(--search-form-bg);
+}
+
+#search-input {
+  border: none;
+  width: 100%;
+  background-color: transparent;
+}
+
+#search-input:focus {
+  outline: none;
+}
+
+
+/********** meaning **********/
+
+.meanings {
+  border-bottom: 1px solid;
+}
+
+.meaning {
+  margin: 2.1rem 0;
+}
+
+
+/********** part of speech **********/
+
+.part-of-speech {
+  display: flex;
+  align-items: center;
+}
+
+.part-of-speech::after {
+  content: "";
+  flex-grow: 1;
+  height: 1px;
+  margin-left: 1rem;
+  background-color: black;
+}
+
+
+/********** definitions **********/
+
+.definitions {
+  margin: 1.5rem 0;
+}
+
+.definitions > h3 {
+  margin-bottom: 1rem;
+}
+
+.definitions > ul {
+  padding-left: 1rem;
+}
+
+
+/********** synonyms, antonyms **********/
+
+.synonyms,
+.antonyms {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.synonyms > p,
+.antonyms > p {
+  font-size: 1.25rem;
+}
+
+
+/********** sources **********/
+
+.source {
+  margin: 2.1rem 0;
+}
+
+.source h3 {
+  text-decoration: underline;
+  margin-bottom: 0.5rem;
+}
+
+.source > img {
+  margin-left: 1rem;
 }
