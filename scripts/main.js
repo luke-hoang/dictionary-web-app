@@ -1,4 +1,33 @@
 document
+  .getElementById('font-selected')
+  .addEventListener('click', () => {
+    const fontOptions = document.getElementById('font-options');
+    if (fontOptions.style.display === 'block') {
+      fontOptions.style.display = 'none';
+    } else {
+      fontOptions.style.display = 'block';
+    }
+  });
+
+
+document.addEventListener('click', (event) => {
+  const fontMenu = document.getElementById('font-menu');
+  if (!fontMenu.contains(event.target)) {
+    document.getElementById('font-options').style.display = 'none';
+  }
+});
+
+
+document
+  .getElementsByName('font')
+  .forEach(fontOption => {
+    fontOption.addEventListener('change', ({target}) => {
+      document.querySelector('#font-selected > span').textContent = target.value;
+    })
+  });
+
+
+document
   .getElementById('dark-theme')
   .addEventListener('change', ({target}) => {
     const rootEl = document.documentElement;

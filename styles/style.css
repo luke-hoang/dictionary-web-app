@@ -1,12 +1,30 @@
 /********** color themes **********/
 
 :root[theme="light"] {
-  --switch-bg: #757575;
+  --main-bg: #FFFFFF;
+  
+  --font-menu-text: #2D2D2D;
+  --font-options-bg: #FFFFFF;
+  --font-options-shadow: #00000010;
+  --font-options-hover: #A445ED;
+  
+  --theme-switch-bg: #757575;
+  --theme-icon-stroke: #757575;
+  
   --search-form-bg: #F4F4F4;
 }
 
 :root[theme="dark"] {
-  --switch-bg: #A445ED;
+  --main-bg: #050505;
+  
+  --font-menu-text: #FFFFFF;
+  --font-options-bg: #1F1F1F;
+  --font-options-shadow: #A445ED;
+  --font-options-hover: #A445ED;
+  
+  --theme-switch-bg: #A445ED;
+  --theme-icon-stroke: #A445ED;
+
   --search-form-bg: #1F1F1F;
 }
 
@@ -17,6 +35,10 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+body {
+  background-color: var(--main-bg);
 }
 
 #wrapper {
@@ -30,7 +52,7 @@ header {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
   margin-bottom: 1.5rem;
 }
 
@@ -58,21 +80,73 @@ h3 {
 }
 
 
-/********** header **********/
+/********** logo **********/
 
 #logo {
   margin-right: auto;
 }
 
-#font-menu {
-  border: none;
-  text-align: right;
-}
+
+/********** vertical bar **********/
 
 #vertical-bar {
   height: 24px;
   border-left: 1px solid;
   position: relative;
+}
+
+
+/********** font menu **********/
+
+#font-menu {
+  color: var(--font-menu-text);
+  position: relative;
+}
+
+#font-selected {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+#font-selected > span {
+  font-weight: 700;
+}
+
+#font-options {
+  position: absolute;
+  right: 0;
+  top: 2.5rem;
+  padding: 0.5em 1.5em;
+  min-width: 11.5em;
+  border-radius: 1rem;
+  box-shadow: 0 5px 30px var(--font-options-shadow);
+  background-color: var(--font-options-bg);
+  display: none;
+}
+
+#font-options > label {
+  display: block;
+  margin: 1em 0;
+}
+
+#font-options > label+label {
+  margin-top: 1.5em;
+}
+
+#font-options > label:hover {
+  cursor: pointer;
+  color: var(--font-options-hover);
+  font-weight: 700;
+}
+
+#font-options > input:checked+label {
+  font-weight: 700;
+}
+
+#font-options > input {
+  display: none;
 }
 
 
@@ -88,7 +162,7 @@ h3 {
   width: 40px;
   height: 20px;
   border-radius: 10px;
-  background-color: var(--switch-bg);
+  background-color: var(--theme-switch-bg);
   position: relative;
 }
 
@@ -105,6 +179,10 @@ h3 {
 
 #dark-theme:checked ~ #slider {
   transform: translateX(20px);
+}
+
+#theme-icon {
+  stroke: var(--theme-icon-stroke);
 }
 
 
@@ -144,7 +222,7 @@ h3 {
 }
 
 
-/********** search error **********/
+/********** input error **********/
 
 #input-error {
   margin-top: 0.5rem;

@@ -15,24 +15,38 @@
   <div id="wrapper">
     <header>
       <img src="./assets/images/logo.svg" alt="logo" id="logo">
-      <select id="font-menu">
-        <option value="sans-serif">Sans Serif</option>
-        <option value="Serif">Serif</option>
-        <option value="Mono">Mono</option>
-      </select>
+
+      <div id="font-menu">
+        <div id="font-selected">
+          <span>Sans Serif</span>
+          <img src="./assets/images/icon-arrow-down.svg">
+        </div>
+        <div id="font-options" class="hidden">
+          <input type="radio" name="font" value="Sans Serif" id="sans-serif" checked>
+          <label for="sans-serif">Sans Serif</label>
+          <input type="radio" name="font" value="Serif" id="serif">
+          <label for="serif">Serif</label>
+          <input type="radio" name="font" value="Mono" id="mono">
+          <label for="mono">Mono</label>
+        </div>
+      </div>
+
       <div id="vertical-bar"></div>
+
       <label for="dark-theme" id="theme-switch">
         <input type="checkbox" id="dark-theme">
         <span id="slider"></span>
       </label>
-      <img src="./assets/images/icon-moon.svg" alt="">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+        <path id="theme-icon" fill="none" stroke="#838383" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M1 10.449a10.544 10.544 0 0 0 19.993 4.686C11.544 15.135 6.858 10.448 6.858 1A10.545 10.545 0 0 0 1 10.449Z"/>
+      </svg>
     </header>
 
     <form id="search-form">
       <input type="text" id="search-input" maxlength="50" placeholder="Search for any word...">
       <input type="image" id="search-icon" src="./assets/images/icon-search.svg">
     </form>
-    
+
     <main></main>
   </div>
 </body>
