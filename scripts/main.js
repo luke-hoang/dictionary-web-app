@@ -23,6 +23,7 @@ document
   .forEach(fontOption => {
     fontOption.addEventListener('change', ({target}) => {
       document.querySelector('#font-selected > span').textContent = target.value;
+      document.documentElement.setAttribute('font', target.value);
     })
   });
 
