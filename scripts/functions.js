@@ -25,7 +25,12 @@ function renderInputError() {
 function renderSearchError(error) {
   const searchErrorArticle = document.createElement('article');
   searchErrorArticle.setAttribute('id', 'search-error');
-    
+  
+  const confusedFaceEmoji = document.createElement('p');
+  confusedFaceEmoji.setAttribute('class', 'emoji');
+  confusedFaceEmoji.innerHTML = '&#128533';
+  searchErrorArticle.appendChild(confusedFaceEmoji);
+
   const searchErrorHeading = document.createElement('h2');
   searchErrorHeading.textContent = error.title;
   searchErrorArticle.appendChild(searchErrorHeading);
@@ -192,7 +197,7 @@ function createSourceSection(sources) {
     sourceAnchor.textContent = source;
 
     const newWindowIcon = document.createElement('img');
-    newWindowIcon.setAttribute('src', './assets/images/icon-new-window.svg');
+    newWindowIcon.setAttribute('src', './images/icon-new-window.svg');
     sourceAnchor.appendChild(newWindowIcon);
 
     sourceDiv.appendChild(sourceAnchor);
