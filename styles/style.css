@@ -22,6 +22,7 @@
 :root[theme="light"] {
   --background: #FFFFFF;
   --text: #2D2D2D;
+  --break: #E9E9E9;
   
   --font-menu-text: #2D2D2D;
   --font-options-bg: #FFFFFF;
@@ -32,11 +33,14 @@
   --theme-icon-stroke: #757575;
   
   --search-form-bg: #F4F4F4;
+
+  --source-link: #2D2D2D;
 }
 
 :root[theme="dark"] {
   --background: #050505;
   --text: #FFFFFF;
+  --break: #3A3A3A;
   
   --font-menu-text: #FFFFFF;
   --font-options-bg: #1F1F1F;
@@ -47,6 +51,8 @@
   --theme-icon-stroke: #A445ED;
 
   --search-form-bg: #1F1F1F;
+
+  --source-link: #FFFFFF;
 }
 
 
@@ -65,7 +71,8 @@ body {
 }
 
 #wrapper {
-  max-width: 1200px;
+  min-width: 375px;
+  max-width: 740px;
   padding: 0 5vw;
   margin: 2rem auto;
 }
@@ -195,8 +202,9 @@ h3 {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #fff;
+  background: #FFFFFF;
   transition: transform 500ms;
+  background-color: ;
 }
 
 #dark-theme:checked ~ #slider {
@@ -217,14 +225,24 @@ h3 {
   padding: 1.25rem;
   border: none;
   border-radius: 1rem;
-  height: 3rem;
   background-color: var(--search-form-bg);
+}
+
+#search-form:hover {
+  border: 1px solid #A445ED;
 }
 
 #search-input {
   border: none;
   width: 100%;
   background-color: transparent;
+  color: var(--text);
+  font-size: 1.25rem;
+  font-family: var(--font-family);
+}
+
+#search-input:hover {
+  cursor: pointer;
 }
 
 #search-input:focus {
@@ -235,12 +253,17 @@ h3 {
 /********** search error **********/
 
 #search-error {
-  margin-top: 4rem;
+  margin-top: 3em;
   text-align: center;
 }
 
+.emoji {
+  font-size: 4rem;
+  margin-bottom: 0.5em;
+}
+
 #search-error h2 {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1em;
 }
 
 
@@ -263,7 +286,7 @@ h3 {
 /********** meaning **********/
 
 .meanings {
-  border-bottom: 1px solid;
+  border-bottom: 1px solid var(--break);
 }
 
 .meaning {
@@ -276,7 +299,6 @@ h3 {
 .part-of-speech {
   display: flex;
   align-items: center;
-  font-weight: 400;
 }
 
 .part-of-speech::after {
@@ -284,7 +306,7 @@ h3 {
   flex-grow: 1;
   height: 1px;
   margin-left: 1rem;
-  background-color: #E9E9E9;
+  background-color: var(--break);
 }
 
 
@@ -301,26 +323,35 @@ h3 {
 }
 
 .definitions > ul {
-  padding-left: 1rem;
+  padding-left: 1.75rem;
+}
+
+.definitions > ul > li {
+  margin: 1rem;
+}
+
+.definitions > ul > li::marker {
+  color: #A445ED;
+}
+
+.example {
+  margin-top: 0.5rem;
+  color: #757575;
+}
+
+.example::before {
+  content: open-quote;
+}
+
+.example::after {
+  content: close-quote;
 }
 
 
 /********** synonyms **********/
-
-.synonyms {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  margin: 1.5rem 0;
-}
-
-.synonyms > p {
-  font-size: 1.25rem;
-}
-
-
 /********** antonyms **********/
 
+.synonyms,
 .antonyms {
   display: flex;
   align-items: flex-start;
@@ -328,8 +359,17 @@ h3 {
   margin: 1.5rem 0;
 }
 
+.synonyms > p,
 .antonyms > p {
   font-size: 1.25rem;
+  font-weight: 700;
+  color: #A445ED;
+}
+
+.synonyms > p:hover,
+.antonyms > p:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 
@@ -344,12 +384,15 @@ h3 {
 
 .source h4 {
   text-decoration: underline;
+  font-weight: 400;
+  color: #757575;
 }
 
 .source-link {
   display: block;
   display: flex;
   justify-content: space-between;
+  color: var(--source-link);
 }
 
 .source-link > img {
