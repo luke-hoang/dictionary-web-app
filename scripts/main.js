@@ -1,3 +1,4 @@
+// toggle font options display when clicking font selector
 document
   .getElementById('font-selected')
   .addEventListener('click', () => {
@@ -10,6 +11,7 @@ document
   });
 
 
+// hide font options when clicking outside the font menu
 document.addEventListener('click', (event) => {
   const fontMenu = document.getElementById('font-menu');
   if (!fontMenu.contains(event.target)) {
@@ -18,16 +20,19 @@ document.addEventListener('click', (event) => {
 });
 
 
+// switch between custom fonts
 document
   .getElementsByName('font')
   .forEach(fontOption => {
     fontOption.addEventListener('change', ({target}) => {
       document.querySelector('#font-selected > span').textContent = target.value;
       document.documentElement.setAttribute('font', target.value);
+      document.getElementById('font-options').style.display = 'none';
     })
   });
 
 
+// switch between light and dark themes
 document
   .getElementById('dark-theme')
   .addEventListener('change', ({target}) => {
@@ -39,7 +44,8 @@ document
     }
   });
 
-  
+
+// display results
 const searchForm = document.getElementById('search-form');
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault();
