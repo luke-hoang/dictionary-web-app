@@ -47,9 +47,13 @@ function renderSearchError(error) {
 function renderSearchResult(result) {
   const searchResultArticle = document.createElement('article');
   searchResultArticle.setAttribute('class', 'search-result');
-  
-  const phoneticSection = createPhoneticSection(result.word, result.phonetic);
-  searchResultArticle.appendChild(phoneticSection);
+
+  const wordHeading = document.createElement('h1');
+  wordHeading.textContent = result.word;
+  searchResultArticle.appendChild(wordHeading);
+
+  const phoneticsSection = createPhoneticsSection(result.phonetic, result.phonetics);
+  searchResultArticle.appendChild(phoneticsSection);
 
   const meaningsSection = createMeaningsSection(result.meanings);
   searchResultArticle.appendChild(meaningsSection);
@@ -62,19 +66,60 @@ function renderSearchResult(result) {
 }
 
 
-function createPhoneticSection(word, phonetic) {
-  const phoneticSection = document.createElement('section');
-  phoneticSection.setAttribute('class', 'phonetic');
-
-  const wordHeading = document.createElement('h1');
-  wordHeading.textContent = word;
-  phoneticSection.appendChild(wordHeading);
+function createPhoneticsSection(phonetic, phonetics) {
+  const phoneticsSection = document.createElement('section');
+  phoneticsSection.setAttribute('class', 'phonetics');
 
   const phoneticHeading = document.createElement('h2');
   phoneticHeading.textContent = phonetic;
-  phoneticSection.appendChild(phoneticHeading);
+  phoneticsSection.appendChild(phoneticHeading);
 
-  return phoneticSection;
+  for (const phonetic of phonetics) {
+    const parser = new DOMParser;
+
+    if (phonetic.text && phonetic.audio) {
+      const phoneticSection = document.createElement('section');
+      phoneticSection.setAttribute('class', 'phonetic');
+      phoneticsSection.appendChild(phoneticSection);
+      
+      const startIndex = phonetic.audio.lastIndexOf('-') + 1;
+      const endIndex = phonetic.audio.lastIndexOf('.');
+      const audioId = phonetic.audio.slice(startIndex, endIndex);
+
+      const phoneticAudio = document.createElement('audio');
+      phoneticAudio.setAttribute('id', audioId);
+      phoneticSection.appendChild(phoneticAudio);
+
+      const phoneticSource = document.createElement('source');
+      phoneticSource.setAttribute('src', phonetic.audio);
+      phoneticAudio.appendChild(phoneticSource);
+
+      const phoneticParagraph = document.createElement('p');
+      phoneticParagraph.textContent = audioId.toUpperCase();
+      phoneticSection.appendChild(phoneticParagraph);
+
+      const playIconString = (
+        `<svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 75 75" onclick="playAudio('${audioId}')">
+          <g class="play-icon" fill="#A445ED" fill-rule="evenodd">
+            <circle cx="37.5" cy="37.5" r="37.5" opacity=".25"/>
+            <path d="M29 27v21l21-10.5z"/>
+          </g>
+        </svg>`
+      );
+
+      const playIcon = parser.parseFromString(playIconString, 'text/html');
+      phoneticSection.appendChild(playIcon.body.firstChild);
+    }
+  }
+  
+  return phoneticsSection;
+}
+
+
+function playAudio(audioId) {
+  document
+    .getElementById(audioId)
+    .play();
 }
 
 
@@ -189,6 +234,8 @@ function createSourceSection(sources) {
   sourceSection.appendChild(sourceHeading);
 
   const sourceDiv = document.createElement('div');
+  sourceDiv.setAttribute('class', 'source-links');
+
   for (const source of sources) {
     const sourceAnchor = document.createElement('a');
     sourceAnchor.setAttribute('class', 'source-link')
@@ -206,4 +253,27 @@ function createSourceSection(sources) {
   sourceSection.appendChild(sourceDiv);
 
   return sourceSection;
+}
+
+
+function getCustomSettings() {
+  const appName = 'dictionary-web-app';
+  const customSettings = localStorage.getItem(appName);
+  
+  if (customSettings === null) {
+    localStorage.setItem(
+      appName,
+      JSON.stringify({
+        font:'mono',
+        theme:'dark'
+      })
+    );
+  }
+
+  return JSON.parse(localStorage.getItem(appName));
+}
+
+
+function updateCustomSettings(customSettings) {
+  localStorage.setItem('dictionary-web-app', JSON.stringify(customSettings));
 }
