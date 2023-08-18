@@ -259,13 +259,13 @@ function createSourceSection(sources) {
 function getCustomSettings() {
   const appName = 'dictionary-web-app';
   const customSettings = localStorage.getItem(appName);
-  
+
   if (customSettings === null) {
     localStorage.setItem(
       appName,
       JSON.stringify({
-        font:'mono',
-        theme:'dark'
+        font:'sans-serif',
+        theme: window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light'
       })
     );
   }
@@ -275,5 +275,8 @@ function getCustomSettings() {
 
 
 function updateCustomSettings(customSettings) {
-  localStorage.setItem('dictionary-web-app', JSON.stringify(customSettings));
+  localStorage.setItem(
+    'dictionary-web-app',
+    JSON.stringify(customSettings)
+  );
 }
