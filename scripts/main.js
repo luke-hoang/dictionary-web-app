@@ -1,19 +1,8 @@
-// load custom settings
+// load custom font and theme
+loadCustomSettings();
+
 const customSettings = getCustomSettings();
 
-// local custom font setting
-const fontOption = document.getElementById(customSettings.font);
-fontOption.checked = true;
-document.querySelector('#font-selected > span').textContent = fontOption.value;
-document.documentElement.setAttribute('font', fontOption.value);
-
-
-// local custom theme settings
-document.documentElement.setAttribute('theme', customSettings.theme);
-
-if (customSettings.theme === 'dark') {
-  document.getElementById('dark-theme').checked = true;
-}
 
 // toggle font options display when clicking font selector
 document
@@ -43,10 +32,10 @@ document
   .forEach(fontOption => {
     fontOption.addEventListener('change', ({target}) => {
       document.querySelector('#font-selected > span').textContent = target.value;
-      document.documentElement.setAttribute('font', target.value);
+      document.documentElement.setAttribute('font', target.id);
       document.getElementById('font-options').style.visibility = 'hidden';
       customSettings.font = target.id;
-      updateCustomSettings(customSettings);
+      setCustomSettings(customSettings);
     })
   });
 
@@ -63,7 +52,7 @@ document
       rootEl.setAttribute('theme', 'light');
       customSettings.theme = 'light';
     }
-    updateCustomSettings(customSettings);
+    setCustomSettings(customSettings);
   });
 
 

@@ -97,7 +97,6 @@ function createPhoneticsSection(phonetic, phonetics) {
       const phoneticParagraph = document.createElement('p');
       phoneticParagraph.textContent = audioId.toUpperCase();
       phoneticSection.appendChild(phoneticParagraph);
-
       const playIconString = (
         `<svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 75 75" onclick="playAudio('${audioId}')">
           <g class="play-icon" fill="#A445ED" fill-rule="evenodd">
@@ -106,7 +105,6 @@ function createPhoneticsSection(phonetic, phonetics) {
           </g>
         </svg>`
       );
-
       const playIcon = parser.parseFromString(playIconString, 'text/html');
       phoneticSection.appendChild(playIcon.body.firstChild);
     }
@@ -117,9 +115,7 @@ function createPhoneticsSection(phonetic, phonetics) {
 
 
 function playAudio(audioId) {
-  document
-    .getElementById(audioId)
-    .play();
+  document.getElementById(audioId).play();
 }
 
 
@@ -256,10 +252,26 @@ function createSourceSection(sources) {
 }
 
 
+function loadCustomSettings() {
+  const customSettings = getCustomSettings();
+  
+  const root = document.documentElement;
+  
+  const fontOption = document.getElementById(customSettings.font);
+  fontOption.checked = true;
+  document.querySelector('#font-selected > span').textContent = fontOption.value;
+  root.setAttribute('font', fontOption.id);
+
+  root.setAttribute('theme', customSettings.theme);
+  if (customSettings.theme === 'dark') {
+    document.getElementById('dark-theme').checked = true;
+  }
+}
+
+
 function getCustomSettings() {
   const appName = 'dictionary-web-app';
   const customSettings = localStorage.getItem(appName);
-
   if (customSettings === null) {
     localStorage.setItem(
       appName,
@@ -269,12 +281,11 @@ function getCustomSettings() {
       })
     );
   }
-
   return JSON.parse(localStorage.getItem(appName));
 }
 
 
-function updateCustomSettings(customSettings) {
+function setCustomSettings(customSettings) {
   localStorage.setItem(
     'dictionary-web-app',
     JSON.stringify(customSettings)

@@ -4,15 +4,15 @@
 
 /********** font-types **********/
 
-:root[font="Sans Serif"] {
+:root[font="sans-serif"] {
   --font-family: 'Lora', serif;
 }
 
-:root[font="Serif"] {
+:root[font="serif"] {
   --font-family: 'Inter', sans-serif;
 }
 
-:root[font="Mono"] {
+:root[font="mono"] {
   --font-family: 'Inconsolata', monospace;
 }
 
