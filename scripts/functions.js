@@ -58,7 +58,7 @@ function renderSearchResult(result) {
   const meaningsSection = createMeaningsSection(result.meanings);
   searchResultArticle.appendChild(meaningsSection);
 
-  const sourcesSection = createSourceSection(result.sourceUrls);
+  const sourcesSection = createSourcesSection(result.sourceUrls);
   searchResultArticle.appendChild(sourcesSection);
 
   const main = document.querySelector('main');
@@ -217,38 +217,41 @@ function createAntonymsSection(antonynms) {
 }
 
 
-function createSourceSection(sources) {
-  const sourceSection = document.createElement('section');
-  sourceSection.setAttribute('class', 'source');
+function createSourcesSection(sources) {
+  const sourcesSection = document.createElement('section');
+  sourcesSection.setAttribute('class', 'sources');
 
-  const sourceHeading = document.createElement('h4');  
+  const sourcesHeading = document.createElement('h4');  
   if (sources.length > 1) {
-    sourceHeading.textContent = 'Sources';
+    sourcesHeading.textContent = 'Sources';
   } else {
-    sourceHeading.textContent = 'Source';
+    sourcesHeading.textContent = 'Source';
   }
-  sourceSection.appendChild(sourceHeading);
+  sourcesSection.appendChild(sourcesHeading);
 
-  const sourceDiv = document.createElement('div');
-  sourceDiv.setAttribute('class', 'source-links');
+  const sourcesDiv = document.createElement('div');
+  sourcesDiv.setAttribute('class', 'source-links');
+  sourcesSection.appendChild(sourcesDiv);
 
   for (const source of sources) {
+
+    const sourceDiv = document.createElement('div');
+    sourceDiv.setAttribute('class', 'source-link');
+    sourcesDiv.appendChild(sourceDiv);
+
     const sourceAnchor = document.createElement('a');
-    sourceAnchor.setAttribute('class', 'source-link')
+    sourceAnchor.setAttribute('class', 'source-url')
     sourceAnchor.setAttribute('target', '_blank');
     sourceAnchor.setAttribute('href', source);
     sourceAnchor.textContent = source;
+    sourceDiv.appendChild(sourceAnchor);
 
     const newWindowIcon = document.createElement('img');
     newWindowIcon.setAttribute('src', './images/icon-new-window.svg');
-    sourceAnchor.appendChild(newWindowIcon);
-
-    sourceDiv.appendChild(sourceAnchor);
+    sourceDiv.appendChild(newWindowIcon);
   }
 
-  sourceSection.appendChild(sourceDiv);
-
-  return sourceSection;
+  return sourcesSection;
 }
 
 

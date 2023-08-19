@@ -2,7 +2,6 @@
 loadCustomSettings();
 const customSettings = getCustomSettings();
 
-
 // toggle font options display when clicking font selector
 document
   .getElementById('font-selected')
