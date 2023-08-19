@@ -23,4 +23,5 @@ Users should be able to:
 ### Screenshot
 
 ![](./screenshot.png)
+
 Live Site URL: https://luke-hoang.github.io/dictionary-web-app
