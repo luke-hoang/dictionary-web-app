@@ -426,9 +426,9 @@ h4 {
 }
 
 
-/********** source **********/
+/********** sources **********/
 
-.source {
+.sources {
   display: flex;
   gap: 1em;
   flex-wrap: wrap;
@@ -443,15 +443,20 @@ h4 {
 
 .source-link {
   display: flex;
-  justify-content: space-between;
-  color: var(--source-link);
-  text-decoration: none;
+  align-items: center;
+  gap: 0.5em;
 }
 
-.source-link:hover {
+.source-url {
+  text-decoration: none;
+  color: var(--source-link);
+}
+
+.source-url:hover {
   text-decoration: underline;
 }
 
 .source-link > img {
-  margin-left: 0.5em;
+  width: 14px;
+  height: 14px;
 }
